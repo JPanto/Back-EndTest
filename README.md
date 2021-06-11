@@ -6,12 +6,12 @@ Hirings Double V Partners Test
 -Docker for Windows
 -Sdk netcore 5 (No es necesario con docker-compose)
 
-# Ejecutar desde docker-compose
+# Ejecutar con docker-compose
 
 Ejecutar la solución/proyecto en un editor de codigo ya sea visual studio code o visual studio 2019
 En el terminal PowerShell/Cmd dirigirse al directorio del proyecto y ejecutar el comando "docker-compose up"
 
-# Manualmente con docker
+# Manualmente desde la consola con docker
 
 Ejecutar la solución/proyecto en un editor de codigo ya sea visual studio code o visual studio 2019
 
