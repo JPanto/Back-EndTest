@@ -1,4 +1,5 @@
 using Back_EndTest.Data;
+using Back_EndTest.Models;
 using Back_EndTest.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,9 +31,15 @@ namespace Back_EndTest
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var server = Configuration["DBServer"] ?? "localhost";
+            var port = Configuration["DBPort"] ?? "1401";
+            var user = Configuration["DBUser"] ?? "SA";
+            var password = Configuration["DBPassword"] ?? "Pa55w0rd2019";
+            var database = Configuration["Database"] ?? "testDB";
+
             services.AddDbContext<TestDbContext>(options =>
                 options.UseSqlServer(
-                 Configuration.GetConnectionString("DefaultConnection"),
+                 $"Server={server},{port};Initial Catalog={database};User ID ={user};Password={password}",
                     b => b.MigrationsAssembly(typeof(TestDbContext).Assembly.FullName)));
                     services.AddHttpContextAccessor();
                     services.AddSingleton<IUriService>(o =>
@@ -59,6 +66,7 @@ namespace Back_EndTest
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Back_EndTest v1"));
             }
+            PrepDB.PrepPopulation(app);
 
             app.UseHttpsRedirection();
 
